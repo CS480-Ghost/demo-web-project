@@ -52,6 +52,21 @@ public class WebController {
 		return "OK";
 	}
 
+		/**
+	 * This is a simple example of how the HTTP API works.
+	 * It returns a String "test" in the HTTP response.
+	 * To try it, run the web application locally,
+	 * in your web browser, type the link:
+	 * 	http://localhost:8080/cs480/ping
+	 */
+	@RequestMapping(value = "/cs480/ping2", method = RequestMethod.GET)
+	String healthCheck() {
+		// You can replace this with other string,
+		// and run the application locally to check your changes
+		// with the URL: http://localhost:8080/
+		return "test";
+	}
+	
 	/**
 	 * This is a simple example of how to use a data manager
 	 * to retrieve the data and return it as an HTTP response.
