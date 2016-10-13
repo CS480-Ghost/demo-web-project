@@ -2,6 +2,7 @@ package edu.csupomona.cs480.controller;
 
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,12 @@ import org.springframework.web.servlet.ModelAndView;
 import edu.csupomona.cs480.App;
 import edu.csupomona.cs480.data.User;
 import edu.csupomona.cs480.data.provider.UserManager;
+
+import java.io.IOException;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 
 /**
@@ -36,6 +43,35 @@ public class WebController {
 	 */
 	@Autowired
 	private UserManager userManager;
+	
+	/**
+	 *  Added jsoup method which gets all of the hyperlinks
+	 *  from google and displays them
+	 * 	http://localhost:8080/cs480/ping
+	 */
+	@RequestMapping(value = "/cs480/jsoup", method = RequestMethod.GET)
+	String jsoupMethod() {
+		String printAll = null;
+		Document doc;
+		try {
+			doc = Jsoup.connect("http://google.com").get();
+
+			// get page title
+			String title = doc.title();
+			printAll = (title);
+
+			// get all links
+			Elements links = doc.select("a[href]");
+			for (Element link : links) {
+			//	Appends to string
+				printAll = (printAll + "<br/><br/>Google " + link.text());
+				printAll = (printAll + "<br/>Link : " + link.attr("href"));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return printAll;
+	}
 
 	/**
 	 * This is a simple example of how the HTTP API works.
@@ -60,7 +96,7 @@ public class WebController {
 	 * 	http://localhost:8080/cs480/ping
 	 */
 	@RequestMapping(value = "/cs480/ping2", method = RequestMethod.GET)
-	String healthCheck() {
+	String healthCheck2() {
 		// You can replace this with other string,
 		// and run the application locally to check your changes
 		// with the URL: http://localhost:8080/
