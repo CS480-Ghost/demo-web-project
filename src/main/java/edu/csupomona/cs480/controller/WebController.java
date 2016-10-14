@@ -21,6 +21,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import org.apache.commons.math3.stat.regression.SimpleRegression;
+
 
 /**
  * This is the controller used by Spring framework.
@@ -43,6 +45,30 @@ public class WebController {
 	 */
 	@Autowired
 	private UserManager userManager;
+	
+	/**
+	 *  Added Commons Math method that applies the ordinary
+	 *  linear regression to two series and displays the slope
+	 *  and intercept.
+	 */
+	@RequestMapping(value = "/cs480/commonsmath", method = RequestMethod.GET)
+	void commonsMathMethod() {
+		// Create regression object, with true as parameter (for the intercept)
+		SimpleRegression simple new SimpleRegression(true);
+		
+		// Pass series data to the model
+		simple.addData(new double[] [] {
+			{1, 2},
+            {2, 3},
+            {3, 4},
+            {4, 5},
+            {5, 6}
+		});
+		
+		// Print the slope and intercept
+		System.out.println("the slope = " + simple.getSlope());
+		System.out.println("the intercept = " + simple.getIntercept());
+	}
 	
 	/**
 	 *  Added jsoup method which gets all of the hyperlinks
