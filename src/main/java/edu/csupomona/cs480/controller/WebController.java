@@ -21,6 +21,15 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import com.google.common.base.MoreObjects;
+import com.google.common.cache.CacheBuilder;
+import com.google.common.cache.CacheLoader;
+import com.google.common.cache.LoadingCache;
+
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 
@@ -68,6 +77,19 @@ public class WebController {
 		// Print the slope and intercept
 		System.out.println("the slope = " + simple.getSlope());
 		System.out.println("the intercept = " + simple.getIntercept());
+	}
+	
+	/**
+	 *  Added Google Guava method that builds a cache
+	 *  for locations.
+	 */
+	@RequestMapping(value = "/cs480/guavacache", method = RequestMethod.GET)
+	void cacheBuilder() {
+		LoadingCache<String> locationCache = CacheBuilder.newBuilder()
+		.maximumSize(100) // maximum 100 records can be cached
+		.expireAfterAccess(30, TimeUnit.MINUTES) // cache will expire after 30 minutes of access
+		.build(new CacheLoader<String>(){ // build the cacheloader
+		System.out.println("Cache built.");
 	}
 	
 	/**
