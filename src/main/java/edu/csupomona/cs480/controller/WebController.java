@@ -21,15 +21,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-//import java.util.HashMap;
-//import java.util.Map;
-//import java.util.concurrent.ExecutionException;
-//import java.util.concurrent.TimeUnit;
-//import com.google.common.base.MoreObjects;
-//import com.google.common.cache.CacheBuilder;
-//import com.google.common.cache.CacheLoader;
-//import com.google.common.cache.LoadingCache;
-
 //import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 
@@ -88,21 +79,6 @@ public class WebController {
         return one + two;
     }
 	
-	
-	
-	/**
-	 *  Added Google Guava method that builds a cache
-	 *  for locations.
-	 */
-//	@RequestMapping(value = "/cs480/guavacache", method = RequestMethod.GET)
-//	void cacheBuilder() {
-//		LoadingCache<String> locationCache = CacheBuilder.newBuilder()
-//		.maximumSize(100) // maximum 100 records can be cached
-//		.expireAfterAccess(30, TimeUnit.MINUTES) // cache will expire after 30 minutes of access
-//		.build(new CacheLoader<String>(){ // build the cacheloader
-//		System.out.println("Cache built.");
-//	}
-	
 	/**
 	 *  Added jsoup method which gets all of the hyperlinks
 	 *  from google and displays them
@@ -147,19 +123,21 @@ public class WebController {
 		return "OK";
 	}
 
-		/**
+	/**
 	 * This is a simple example of how the HTTP API works.
 	 * It returns a String "test" in the HTTP response.
 	 * To try it, run the web application locally,
 	 * in your web browser, type the link:
 	 * 	http://localhost:8080/cs480/ping
 	 */
-	@RequestMapping(value = "/cs480/ping2", method = RequestMethod.GET)
-	String healthCheck2() {
-		// You can replace this with other string,
-		// and run the application locally to check your changes
-		// with the URL: http://localhost:8080/
-		return "test";
+	@RequestMapping(value = "/cs480/pingUser", method = RequestMethod.GET)
+	String pingUser(@PathVariable("userId") String userId) {
+		if (!(userId.length() > 0)) {
+			return "";
+		}
+		else {
+			return userId;
+		}
 	}
 	
 	/**
@@ -172,7 +150,7 @@ public class WebController {
 	 * Try it in your web browser:
 	 * 	http://localhost:8080/cs480/user/user101
 	 */
-	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/cs480/user/{userId}", method = RequestMethod.GET) 
 	User getUser(@PathVariable("userId") String userId) {
 		User user = userManager.getUser(userId);
 		return user;
