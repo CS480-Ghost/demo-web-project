@@ -21,16 +21,16 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import com.google.common.base.MoreObjects;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
+//import java.util.HashMap;
+//import java.util.Map;
+//import java.util.concurrent.ExecutionException;
+//import java.util.concurrent.TimeUnit;
+//import com.google.common.base.MoreObjects;
+//import com.google.common.cache.CacheBuilder;
+//import com.google.common.cache.CacheLoader;
+//import com.google.common.cache.LoadingCache;
 
-import org.apache.commons.math3.stat.regression.SimpleRegression;
+//import org.apache.commons.math3.stat.regression.SimpleRegression;
 
 
 /**
@@ -60,37 +60,48 @@ public class WebController {
 	 *  linear regression to two series and displays the slope
 	 *  and intercept.
 	 */
-	@RequestMapping(value = "/cs480/commonsmath", method = RequestMethod.GET)
-	void commonsMathMethod() {
-		// Create regression object, with true as parameter (for the intercept)
-		SimpleRegression simple new SimpleRegression(true);
-		
-		// Pass series data to the model
-		simple.addData(new double[] [] {
-			{1, 2},
-            {2, 3},
-            {3, 4},
-            {4, 5},
-            {5, 6}
-		});
+//	@RequestMapping(value = "/cs480/commonsmath", method = RequestMethod.GET)
+//	void commonsMathMethod() {
+//		// Create regression object, with true as parameter (for the intercept)
+//		SimpleRegression simple new SimpleRegression(true);
+//		
+//		// Pass series data to the model
+//		simple.addData(new double[] [] {
+//			{1, 2},
+//            {2, 3},
+//            {3, 4},
+//            {4, 5},
+//            {5, 6}
+//		});
 		
 		// Print the slope and intercept
-		System.out.println("the slope = " + simple.getSlope());
-		System.out.println("the intercept = " + simple.getIntercept());
-	}
+//		System.out.println("the slope = " + simple.getSlope());
+//		System.out.println("the intercept = " + simple.getIntercept());
+//	}
+	
+	
+	/**
+	 * junit test for string concatenation
+	 * @test
+	 */
+	public String concatenate(String one, String two){
+        return one + two;
+    }
+	
+	
 	
 	/**
 	 *  Added Google Guava method that builds a cache
 	 *  for locations.
 	 */
-	@RequestMapping(value = "/cs480/guavacache", method = RequestMethod.GET)
-	void cacheBuilder() {
-		LoadingCache<String> locationCache = CacheBuilder.newBuilder()
-		.maximumSize(100) // maximum 100 records can be cached
-		.expireAfterAccess(30, TimeUnit.MINUTES) // cache will expire after 30 minutes of access
-		.build(new CacheLoader<String>(){ // build the cacheloader
-		System.out.println("Cache built.");
-	}
+//	@RequestMapping(value = "/cs480/guavacache", method = RequestMethod.GET)
+//	void cacheBuilder() {
+//		LoadingCache<String> locationCache = CacheBuilder.newBuilder()
+//		.maximumSize(100) // maximum 100 records can be cached
+//		.expireAfterAccess(30, TimeUnit.MINUTES) // cache will expire after 30 minutes of access
+//		.build(new CacheLoader<String>(){ // build the cacheloader
+//		System.out.println("Cache built.");
+//	}
 	
 	/**
 	 *  Added jsoup method which gets all of the hyperlinks
